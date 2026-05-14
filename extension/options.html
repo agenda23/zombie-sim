@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>X インプレゾンビ表示 — 設定</title>
+    <style>
+      :root {
+        font-family: system-ui, sans-serif;
+        line-height: 1.5;
+        color: #0f1419;
+        background: #f7f9f9;
+      }
+      body {
+        max-width: 640px;
+        margin: 2rem auto;
+        padding: 0 1rem 3rem;
+      }
+      h1 {
+        font-size: 1.25rem;
+      }
+      .notice {
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        background: #fff;
+        border: 1px solid #cfd9de;
+        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        margin-top: 1rem;
+      }
+      input[type="text"],
+      input[type="password"],
+      input[type="number"],
+      select {
+        width: 100%;
+        margin-top: 0.25rem;
+        padding: 0.5rem 0.6rem;
+        border-radius: 6px;
+        border: 1px solid #cfd9de;
+        box-sizing: border-box;
+      }
+      .row {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        margin-top: 0.5rem;
+      }
+      button {
+        margin-top: 1.25rem;
+        padding: 0.5rem 1rem;
+        border-radius: 999px;
+        border: none;
+        background: #1d9bf0;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      #status {
+        min-height: 1.25rem;
+        margin-top: 0.75rem;
+        color: #536471;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>X インプレゾンビ表示（ローカル演出） — 設定</h1>
+    <p class="notice">
+      この拡張は<strong>あなたのブラウザ上の見た目だけ</strong>を変えます。投稿や他者の画面、X
+      のサーバーには影響しません。スクショ等での誤認防止にご注意ください。
+    </p>
+    <form id="form">
+      <div class="row">
+        <input type="checkbox" id="enabled" />
+        <label for="enabled" style="margin: 0; font-weight: 600">拡張を有効にする</label>
+      </div>
+      <div class="row">
+        <input type="checkbox" id="llmEnabled" />
+        <label for="llmEnabled" style="margin: 0; font-weight: 600"
+          >LLM で生成する（API キーが必要）</label
+        >
+      </div>
+      <label for="apiKey">API キー（ローカルに保存され、ページには渡りません）</label>
+      <input id="apiKey" type="password" autocomplete="off" />
+      <label for="apiBaseUrl">API ベース URL（OpenAI 互換、末尾 /v1 想定）</label>
+      <input id="apiBaseUrl" type="text" spellcheck="false" />
+      <label for="model">モデル名</label>
+      <input id="model" type="text" spellcheck="false" />
+      <label for="replyCount">偽リプ件数（1〜50）</label>
+      <input id="replyCount" type="number" min="1" max="50" />
+      <label for="emptyPostBehavior">本文が取得できないとき</label>
+      <select id="emptyPostBehavior">
+        <option value="preset">すぐプリセットを使う</option>
+        <option value="llm">空本文でも LLM を試す</option>
+      </select>
+      <button type="submit">保存</button>
+      <p id="status"></p>
+    </form>
+    <script src="options.js"></script>
+  </body>
+</html>

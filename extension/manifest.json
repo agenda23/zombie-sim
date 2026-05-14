@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "X インプレゾンビ表示（ローカル演出）",
+  "version": "0.1.0",
+  "description": "ポスト詳細ページにのみ、自分の画面向けの偽リプ表示を追加します（他者・サーバーには影響しません）。",
+  "permissions": ["storage"],
+  "host_permissions": ["https://*/*", "http://localhost/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://x.com/*/status/*",
+        "https://twitter.com/*/status/*"
+      ],
+      "js": ["content.js"],
+      "css": ["styles/content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

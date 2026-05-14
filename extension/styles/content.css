@@ -1,0 +1,258 @@
+/* X の cellInnerDiv / article[data-testid=tweet] に近いレイアウト。公式の r-* / css-* には依存しない */
+.zombie-sim-root {
+  --z-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --z-text: #0f1419;
+  --z-secondary: #536471;
+  --z-border: #eff3f4;
+  --z-link: #1d9bf0;
+  --z-avatar-bg: #cfd9de;
+  --z-avatar-fg: #0f1419;
+  --z-row-hover: rgba(15, 20, 25, 0.04);
+  font-family: var(--z-font);
+  font-size: 15px;
+  line-height: 1.3333;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background: transparent;
+  color: var(--z-text);
+  border: 0;
+  box-sizing: border-box;
+}
+
+.zombie-sim-root *,
+.zombie-sim-root *::before,
+.zombie-sim-root *::after {
+  box-sizing: border-box;
+}
+
+.zombie-sim-root--dark {
+  --z-text: #e7e9ea;
+  --z-secondary: #71767b;
+  --z-border: #2f3336;
+  --z-link: #1d9bf0;
+  --z-avatar-bg: #2f3336;
+  --z-avatar-fg: #e7e9ea;
+  --z-row-hover: rgba(231, 233, 234, 0.04);
+}
+
+/* cellInnerDiv 相当：行全体 */
+.zombie-sim-cell {
+  width: 100%;
+  position: relative;
+  border-bottom: 1px solid var(--z-border);
+  transition: background-color 0.12s ease;
+}
+
+.zombie-sim-cell:last-child {
+  border-bottom: 0;
+}
+
+.zombie-sim-cell:hover {
+  background-color: var(--z-row-hover);
+}
+
+.zombie-sim-cellInner {
+  padding: 4px 16px 12px;
+}
+
+/* article[data-testid="tweet"] 相当 */
+.zombie-sim-tweetArticle {
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+/* 左アバター列 + 右本文列（r-18u37iz 系の横並び） */
+.zombie-sim-tweetLayout {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 100%;
+}
+
+.zombie-sim-avatarRail {
+  flex: 0 0 auto;
+  width: 40px;
+  padding-top: 4px;
+}
+
+.zombie-sim-avatarHost {
+  width: 40px;
+  height: 40px;
+}
+
+.zombie-sim-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  background: var(--z-avatar-bg);
+  color: var(--z-avatar-fg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.zombie-sim-avatar-initial {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  user-select: none;
+}
+
+.zombie-sim-contentCol {
+  flex: 1;
+  min-width: 0;
+  padding-top: 2px;
+}
+
+/* User-Name ブロック相当 */
+.zombie-sim-userName {
+  margin: 0 0 2px;
+  min-height: 20px;
+}
+
+.zombie-sim-userNameRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 0;
+  row-gap: 0;
+  line-height: 20px;
+}
+
+.zombie-sim-displayName {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--z-text);
+}
+
+.zombie-sim-handleInline {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--z-secondary);
+}
+
+.zombie-sim-metaSep {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--z-secondary);
+}
+
+.zombie-sim-timeWrap {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--z-secondary);
+}
+
+.zombie-sim-timeWrap time {
+  font: inherit;
+  color: inherit;
+}
+
+.zombie-sim-verifiedSvg {
+  width: 18px;
+  height: 18px;
+  margin-left: 2px;
+  margin-right: 0;
+  flex-shrink: 0;
+  vertical-align: -2px;
+  fill: var(--z-link);
+}
+
+.zombie-sim-verifiedSvg path {
+  fill: var(--z-link);
+}
+
+/* data-testid="tweetText" 相当 */
+.zombie-sim-tweetText {
+  margin: 4px 0 0;
+  padding: 0;
+  color: var(--z-text);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* アクションバー（返信・RT・いいね・表示・ブクマ・共有） */
+.zombie-sim-actions {
+  margin-top: 8px;
+  max-width: 430px;
+}
+
+.zombie-sim-actionRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px 0;
+  margin-left: -4px;
+  margin-right: -4px;
+}
+
+.zombie-sim-actionItem {
+  flex: 1 0 auto;
+  display: flex;
+  justify-content: center;
+  min-width: 36px;
+  max-width: 80px;
+}
+
+.zombie-sim-actionBtn {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 6px;
+  min-height: 32px;
+  border: none;
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--z-secondary);
+  font: inherit;
+  cursor: default;
+  line-height: 1;
+}
+
+.zombie-sim-actionBtn:hover {
+  background-color: color-mix(in srgb, var(--z-link) 12%, transparent);
+  color: var(--z-link);
+}
+
+.zombie-sim-actionIconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zombie-sim-actionSvg {
+  width: 18.75px;
+  height: 18.75px;
+  flex-shrink: 0;
+}
+
+.zombie-sim-actionSvg path {
+  fill: currentColor;
+}
+
+.zombie-sim-actionCount {
+  min-width: 0;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.zombie-sim-actionCountText {
+  color: inherit;
+  font: inherit;
+}
+
+.zombie-sim-root--dark .zombie-sim-actionBtn:hover {
+  background-color: rgba(29, 155, 240, 0.12);
+}

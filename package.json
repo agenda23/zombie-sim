@@ -1,0 +1,15 @@
+{
+  "name": "zombie-sim",
+  "private": true,
+  "version": "0.1.0",
+  "description": "X クソリプ表示拡張（ローカル演出）",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "watch": "node scripts/build.mjs --watch"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.287",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.7.0"
+  }
+}
