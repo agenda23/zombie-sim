@@ -1,0 +1,40 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Apply version from tag
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+          jq --arg v "$VERSION" '.version = $v' extension/manifest.json > tmp.mf.json && mv tmp.mf.json extension/manifest.json
+          jq --arg v "$VERSION" '.version = $v' package.json > tmp.pj.json && mv tmp.pj.json package.json
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Pack extension
+        run: |
+          (cd extension/dist && zip -r "$GITHUB_WORKSPACE/zombie-sim-${VERSION}.zip" .)
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: zombie-sim-${{ env.VERSION }}.zip
+          generate_release_notes: true
